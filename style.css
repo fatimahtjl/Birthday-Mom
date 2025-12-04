@@ -1,0 +1,124 @@
+* {
+    
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+}
+body {
+    background: linear-gradient( to right, #cc99b5, #fce6f8);
+    color: white;
+   
+}
+.birthday-section{
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.birthday-box{
+    background: linear-gradient(135deg,  #cc99b5, #fff3fb);
+    padding: 10px 10px;
+    border-radius: 20px;
+    text-align: center;
+
+    width: 90%;
+    max-width: 900px;
+    min-height: 80vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* ⬅️ biar konten mulai dari atas */
+    align-items: center;
+}
+
+.birthday-section h2{
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 50px;
+    text-align: center;
+}
+
+
+
+@media (max-width: 600px){
+    .birthday-box{
+        padding-top: 10px; /* dorong isi sedikit saja */
+    }
+}
+
+.birthday-photo{
+    width: 100%;
+    max-width: 500px; /* biar ga jumbo */
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: center top; /* fokuskan pada wajah di atas */
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 0 6px rgba(255, 120, 180, 0.4));
+
+    /* mask heart */
+    mask-image: url("data:image/svg+xml;utf8,\
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>\
+      <path d='M50 90 L10 50 A22 22 0 1 1 50 20 A22 22 0 1 1 90 50 Z'/>\
+    </svg>");
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+.photo-row{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+/* Di HP — baris jadi vertikal */
+@media (max-width: 600px){
+    .photo-row{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .birthday-photo{
+        max-width: 300px; /* biar pas di layar kecil */
+    }
+}
+@media (min-width: 900px){
+    .birthday-photo{
+        max-width: 350px;
+    }
+}
+/* default state: invisible & sedikit offset */
+.birthday-photo{
+    opacity: 0;
+    transform: translateY(30px); /* default bawah */
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+/* arah animasi tiap foto */
+.anim-left{ transform: translateX(-60px); }
+.anim-right{ transform: translateX(60px); }
+.anim-bottom{ transform: translateY(60px); }
+
+/* saat muncul */
+.show{
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+    animation: float 4s ease-in-out infinite;
+}
+
+/* floating halus setelah muncul */
+@keyframes float {
+    0%   { transform: translateY(0) translateX(0); }
+    25%  { transform: translateY(-10px) translateX(5px); }
+    50%  { transform: translateY(-5px) translateX(-5px); }
+    75%  { transform: translateY(8px) translateX(3px); }
+    100% { transform: translateY(0) translateX(0); }
+}
+
+/* responsif HP: foto3 masuk dari kiri */
+@media (max-width: 700px){
+    .anim-bottom{ transform: translateX(-60px); }
+}
