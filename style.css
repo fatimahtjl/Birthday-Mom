@@ -234,8 +234,8 @@ body {
 }
 
 /* POSISI POJOK DALAM BOX */
-.sticker-top-left    { top: 3%; left: 2%; transform: translateX(-15px) translateY(10px); }
-.sticker-top-right   { top: 3%; right: 2%; transform: translateX(15px)  translateY(10px); }
+.sticker-top-left    { top: 5%; left: 2%; transform: translateX(-15px) translateY(10px); }
+.sticker-top-right   { top: 5%; right: 2%; transform: translateX(15px)  translateY(10px); }
 .sticker-bottom-left { bottom: 2%; left: 2%; transform: translateX(-15px) translateY(10px); }
 .sticker-bottom-right{ bottom: 2%; right: 2%; transform: translateX(15px)  translateY(10px); }
 
