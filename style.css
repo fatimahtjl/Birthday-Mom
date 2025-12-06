@@ -1,3 +1,8 @@
+html, body {
+    overflow-x: hidden;
+}
+
+
 * {
     
     margin: 0;
@@ -22,6 +27,8 @@ body {
     padding: 10px 10px;
     border-radius: 20px;
     text-align: center;
+    position: relative;
+    overflow: visible;
 
     width: 90%;
     max-width: 900px;
@@ -38,6 +45,43 @@ body {
     margin-bottom: 40px;
     font-size: 50px;
     text-align: center;
+}
+/* posisi awal judul */
+.birthday-title {
+    opacity: 0;
+    transform: translateY(-50px);
+    transition:
+        opacity 1.2s ease-out,
+        transform 1.2s cubic-bezier(.22, .61, .36, 1);
+}
+
+/* ketika muncul */
+.birthday-title.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* floating ubur2 */
+.birthday-title.float {
+    animation: titleFloat 2s ease-in-out infinite;
+}
+
+
+
+@keyframes floatSoft {
+    0%   { transform: translateY(0) scale(1); }
+    25%  { transform: translateY(-6px) scale(1.01);}
+    50%  { transform: translateY(4px) scale(0.99);}
+    75%  { transform: translateY(-3px) scale(1.01);}
+    100% { transform: translateY(0) scale(1); }
+}
+
+
+/* keyframe floating */
+@keyframes titleFloat {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
 }
 
 
@@ -90,35 +134,125 @@ body {
         max-width: 350px;
     }
 }
-/* default state: invisible & sedikit offset */
-.birthday-photo{
+/* posisi awal */
+/* jangan gabung transform floating di sini */
+.birthday-photo {
     opacity: 0;
-    transform: translateY(30px); /* default bawah */
-    transition: opacity 1s ease, transform 1s ease;
+    transform: translateY(80px); /* default: datang dari bawah */
+    transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.16, 0.84, 0.44, 1);
 }
 
-/* arah animasi tiap foto */
-.anim-left{ transform: translateX(-60px); }
-.anim-right{ transform: translateX(60px); }
-.anim-bottom{ transform: translateY(60px); }
+/* arah masuk */
+.anim-left {
+    transform: translateX(-120px);
+}
 
-/* saat muncul */
-.show{
+.anim-right {
+    transform: translateX(120px);
+}
+
+.anim-bottom {
+    transform: translateY(120px);
+}
+
+/* pas muncul */
+.show {
     opacity: 1;
     transform: translateX(0) translateY(0);
-    animation: float 4s ease-in-out infinite;
 }
 
 /* floating halus setelah muncul */
-@keyframes float {
-    0%   { transform: translateY(0) translateX(0); }
-    25%  { transform: translateY(-10px) translateX(5px); }
-    50%  { transform: translateY(-5px) translateX(-5px); }
-    75%  { transform: translateY(8px) translateX(3px); }
-    100% { transform: translateY(0) translateX(0); }
+.float {
+    animation:
+        jelly 4s ease-in-out infinite,  /* floating ubur-ubur */
+        pulse 1.5s ease-in-out infinite; /* detak jantung */
 }
 
-/* responsif HP: foto3 masuk dari kiri */
-@media (max-width: 700px){
-    .anim-bottom{ transform: translateX(-60px); }
+
+/* animasi floating ubur-ubur */
+@keyframes jelly {
+    0%   { transform: translateY(0) translateX(0) scale(1); }
+    25%  { transform: translateY(-10px) translateX(6px) scale(1.01); }
+    50%  { transform: translateY(-5px) translateX(-6px) scale(0.99); }
+    75%  { transform: translateY(8px) translateX(4px) scale(1.01); }
+    100% { transform: translateY(0) translateX(0) scale(1); }
 }
+
+/* efek detak jantung */
+@keyframes pulse {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+
+
+
+
+/* --- BASE STICKER STYLE (tidak ubah ukuran/letak) --- */
+.sticker {
+    position: absolute;
+    width: min(10vw, 120px);
+    min-width: 60px;
+    opacity: 0;
+
+    /* posisi awal = geser dikit (nanti ditimpa sesuai arah) */
+    transform: translateY(10px);
+    transition:
+        opacity .7s ease-out,
+        transform .7s cubic-bezier(.22,.61,.36,1);
+}
+
+/* masuk dari kiri */
+.sticker-left-start {
+    transform: translateX(-80px) translateY(12px);
+}
+
+/* masuk dari kanan */
+.sticker-right-start {
+    transform: translateX(80px) translateY(12px);
+}
+
+/* saat sudah tampil */
+.sticker.show {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+
+/* ubur-ubur halus */
+.sticker.float {
+    animation: floatTiny 5s ease-in-out infinite;
+}
+
+/* animasi ubur-ubur */
+@keyframes floatTiny {
+    0%   { transform: translateY(0) translateX(0) scale(1); }
+    25%  { transform: translateY(-10px) translateX(6px) scale(1.01); }
+    50%  { transform: translateY(-5px) translateX(-6px) scale(0.99); }
+    75%  { transform: translateY(8px) translateX(4px) scale(1.01); }
+    100% { transform: translateY(0) translateX(0) scale(1); }
+}
+
+/* POSISI POJOK DALAM BOX */
+.sticker-top-left    { top: 2%; left: 2%; transform: translateX(-15px) translateY(10px); }
+.sticker-top-right   { top: 2%; right: 2%; transform: translateX(15px)  translateY(10px); }
+.sticker-bottom-left { bottom: 2%; left: 2%; transform: translateX(-15px) translateY(10px); }
+.sticker-bottom-right{ bottom: 2%; right: 2%; transform: translateX(15px)  translateY(10px); }
+
+/* MASUK */
+.sticker.show {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+}
+
+/* RESPONSIVE HP — lebih besar */
+@media(max-width: 600px){
+    .sticker{
+        width: min(20vw, 500px);
+    }
+}
+@media(max-width: 600px){
+    .sticker-top-left { top: 15%; }
+    .sticker-top-right{ top: 15%; }
+}
+
