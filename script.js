@@ -107,3 +107,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     stickers.forEach(s => stickerObs.observe(s));
 });
+
+
+
+
+/** ======================
+ *  SEQUENTIAL BOOK FLIP
+ * ====================== */
+
+const pages = document.querySelectorAll(".page");
+let currentPage = 0; // 0 = halaman 1
+
+pages.forEach((page) => {
+  page.addEventListener("click", (e) => {
+
+    const bookRect = page.getBoundingClientRect();
+    const clickX = e.clientX - bookRect.left;
+
+    // ======================
+    // KLIK KANAN → MAJU
+    // ======================
+    if (clickX > bookRect.width / 2) {
+
+      if (currentPage < pages.length) {
+        pages[currentPage]?.classList.add("flipped");
+        currentPage++;
+      }
+
+    }
+
+    // ======================
+    // KLIK KIRI → MUNDUR
+    // ======================
+    else {
+
+      // 🔥 KHUSUS: dari halaman 15 → lompat ke halaman 1
+      if (currentPage === pages.length) {
+
+        pages.forEach(p => p.classList.remove("flipped"));
+        currentPage = 0;
+
+      }
+
+      // normal mundur
+      else if (currentPage > 0) {
+
+        currentPage--;
+        pages[currentPage]?.classList.remove("flipped");
+
+      }
+
+    }
+
+  });
+});
