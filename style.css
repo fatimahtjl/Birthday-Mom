@@ -466,3 +466,60 @@ body {
         font-size: 15px;
     }
 }
+
+
+
+/* ===== SURPRISE OVERLAY ===== */
+#birthday-surprise {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #ffb6d9, #d88bbf);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+/* TEKS */
+.surprise-text {
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  z-index: 2;
+  animation: textBoom .6s ease-out forwards;
+}
+
+@keyframes textBoom {
+  0% { transform: scale(.2); opacity: 0; }
+  80% { transform: scale(1.3); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* EMOT MELEDAK */
+.boom {
+  position: fixed;
+  font-size: 32px;
+  z-index: 100000; /* ⬅️ INI KUNCINYA */
+  animation: boomMove 1.2s ease-out forwards;
+  pointer-events: none;
+}
+
+
+@keyframes boomMove {
+  0% {
+    transform: translate(0,0) scale(.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(1.4);
+    opacity: 0;
+  }
+}
+
+
+
+.floating-heart {
+  pointer-events: none;
+  user-select: none;
+}
