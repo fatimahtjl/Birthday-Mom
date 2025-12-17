@@ -166,31 +166,3 @@ pages.forEach((page) => {
 
 
 
-
-window.addEventListener("load", () => {
-  const overlay = document.getElementById("birthday-surprise");
-  const emojis = ["💖","❤️","💕","💗","💞","🎈","🎉","🎀","😍","🥰","😘"];
-
-  // LEDAKAN RAMAI
-  for (let i = 0; i < 180; i++) {
-    const boom = document.createElement("div");
-    boom.className = "boom";
-    boom.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-
-    boom.style.left = "50%";
-    boom.style.top = "50%";
-
-    boom.style.setProperty("--x", `${(Math.random() - 0.5) * 1400}px`);
-    boom.style.setProperty("--y", `${(Math.random() - 0.5) * 1400}px`);
-
-    document.body.appendChild(boom);
-    // ⬅️ Perpanjang animasi jadi 3 detik supaya love lebih lama terlihat
-    setTimeout(() => boom.remove(), 12000);
-  }
-
-  // HILANG CEPAT (4 DETIK)
-  setTimeout(() => {
-    overlay.style.display = "none";
-  }, 2000);
-});
-
